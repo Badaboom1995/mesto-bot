@@ -18,9 +18,9 @@ bot.telegram.setWebhook(`https://mesto-bot-c5a62508e033.herokuapp.com/bot${token
 const port = process.env.PORT || 3001;
 const app = express();
 app.use(bodyParser.json());
+app.use(bot.webhookCallback(`/bot${token}`));
 
 app.post(`/bot${token}`, (req, res) => {
-    // bot.processUpdate(req.body);
     res.sendStatus(200);
 });
 bot.start(async (ctx) => {
