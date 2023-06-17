@@ -1,17 +1,17 @@
 // write telegram bot using telegraph
 const { Telegraf, Markup, Scenes, session } = require('telegraf');
 const bot = new Telegraf('6047089461:AAFLLPE_DHV8XuKP0FRaOhFj15u_QzWTvxc');
-const {createNavigation} = require('../createNavigation.js');
-const {makeRequest} = require("../helpers/makeRequest");
+const {createNavigation} = require('./createNavigation.js');
+const {makeRequest} = require("./helpers/makeRequest");
 const { v4: uuid } = require('uuid');
-const {authScene} = require("../scenes/authScene");
-const {makeKeyboard} = require("../helpers/MakeInlineKeyboard");
+const {authScene} = require("./scenes/authScene");
+const {makeKeyboard} = require("./helpers/MakeInlineKeyboard");
 
 const stage = new Scenes.Stage([authScene]);
 bot.use(session())
 bot.use(stage.middleware());
 
-bot.telegram.setWebhook('https://mesto-bot.vercel.app/api/index');
+bot.telegram.setWebhook('https://mesto-bot-c5a62508e033.herokuapp.com/');
 
 bot.start(async (ctx) => {
     // const credentials = {
