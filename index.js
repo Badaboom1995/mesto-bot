@@ -1,26 +1,29 @@
 // write telegram bot using telegraph
 const { Telegraf, Markup, Scenes, session } = require('telegraf');
-const bot = new Telegraf('6047089461:AAFLLPE_DHV8XuKP0FRaOhFj15u_QzWTvxc');
 const {createNavigation} = require('./createNavigation.js');
-const {makeRequest} = require("./helpers/makeRequest");
-const { v4: uuid } = require('uuid');
 const {authScene} = require("./scenes/authScene");
 const {makeKeyboard} = require("./helpers/MakeInlineKeyboard");
+
+
+const express = require('express');
+const bodyParser = require('body-parser');
+const token = '6047089461:AAFLLPE_DHV8XuKP0FRaOhFj15u_QzWTvxc'
+const bot = new Telegraf(token);
 
 const stage = new Scenes.Stage([authScene]);
 bot.use(session())
 bot.use(stage.middleware());
 
-bot.telegram.setWebhook('https://mesto-bot-c5a62508e033.herokuapp.com/');
+bot.telegram.setWebhook(`https://mesto-bot-c5a62508e033.herokuapp.com/bot${token}`);
+const port = process.env.PORT || 3001;
+const app = express();
+app.use(bodyParser.json());
 
+app.post(`/bot${token}`, (req, res) => {
+    // bot.processUpdate(req.body);
+    res.sendStatus(200);
+});
 bot.start(async (ctx) => {
-    // const credentials = {
-    //     RqUid,
-    //     email: "aleksey.belov.95@gmail.com",
-    //     password: "8INancewok95"
-    // }
-    // const token = await makeRequest(ctx, 'https://api.mesto.co/v1/auth/getRefreshTokenByPassword', "POST",credentials)
-    // console.log(token)
     await ctx.reply('Привет! Для начала работы с ботом нужно авторизоваться', makeKeyboard(['Авторизоваться'], 1,'auth'));
 });
 bot.action(/auth(.+)/, async (ctx) => {
@@ -53,6 +56,10 @@ bot.on('new_chat_members', (ctx) => {
     const userId = ctx.message.new_chat_members[0].id;
     const username = ctx.message.new_chat_members[0].username;
 })
+
+app.listen(port, () => {
+    console.log(`Express server is listening on ${port}`);
+});
 
 // bot.launch();
 
