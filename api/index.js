@@ -11,6 +11,8 @@ const stage = new Scenes.Stage([authScene]);
 bot.use(session())
 bot.use(stage.middleware());
 
+bot.telegram.setWebhook('https://mesto-bot.vercel.app/api/index');
+
 bot.start(async (ctx) => {
     // const credentials = {
     //     RqUid,
@@ -52,7 +54,7 @@ bot.on('new_chat_members', (ctx) => {
     const username = ctx.message.new_chat_members[0].username;
 })
 
-bot.launch();
+// bot.launch();
 
 
 
