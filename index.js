@@ -24,11 +24,11 @@ app.post(`/bot${token}`, (req, res) => {
     res.sendStatus(200);
 });
 bot.start(async (ctx) => {
-    // await ctx.reply('Привет! Для начала работы с ботом нужно авторизоваться', makeKeyboard(['Авторизоваться'], 1,'auth'));
+    await ctx.reply('Привет! Для начала работы с ботом нужно авторизоваться', makeKeyboard(['Авторизоваться'], 1,'auth'));
     // open Web App on button click
-    await ctx.replyWithHTML(`Для работы с ботом нужно авторизоваться. Для этого нажмите кнопку "Авторизоваться"`, Markup.inlineKeyboard([
-        Markup.button.webApp('Авторизоваться', 'https://mesto-front-ashen.vercel.app/')
-    ]))
+    // await ctx.replyWithHTML(`Для работы с ботом нужно авторизоваться. Для этого нажмите кнопку "Авторизоваться"`, Markup.inlineKeyboard([
+    //     Markup.button.webApp('Авторизоваться', 'https://mesto-front-ashen.vercel.app/')
+    // ]))
     // await ctx.reply('_', Markup.inlineKeyboar())
 });
 bot.action(/auth(.+)/, async (ctx) => {
