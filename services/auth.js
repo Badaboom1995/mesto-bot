@@ -5,7 +5,8 @@ const runPrivately = async (ctx, func) => {
     const currentChatId = ctx.message.chat.id;
     const res = await supabase.from('Users').select('chat_id').eq('chat_id', currentChatId).single()
     if(res?.error) {
-        ctx.reply('Авторизуйтесь, чтобы пользоваться этой функцией', makeKeyboard(['Авторизоваться'], 1,'auth'))
+        await ctx.reply('Авторизуйтесь, чтобы пользоваться этой функцией', makeKeyboard(['Авторизоваться'], 1,'auth'))
+        return
     }
     func()
     console.log(res)
