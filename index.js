@@ -20,6 +20,7 @@ bot.use(stage.middleware());
 const port = process.env.PORT || 3002;
 const app = express();
 app.use(bodyParser.json());
+bot.telegram.setWebhook(`https://mesto-bot-c5a62508e033.herokuapp.com/bot${token}`);
 app.use(bot.webhookCallback(`/bot${token}`));
 
 app.post(`/bot${token}`, (req, res) => {
