@@ -51,7 +51,7 @@ bot.start(async (ctx) => {
                 if(res.error) throw new Error('Ошибка при добавлении пользователя в базу данных')
             })
         } catch(e) {
-            await ctx.reply('Ошибка. Возможно срок действия кода истек. Попробуйте заново');
+            await ctx.reply(e.message);
             return ctx.scene.enter('authScene');
         }
         return
@@ -66,6 +66,9 @@ bot.action(/auth(.+)/, async (ctx) => {
 
 bot.on('text', (ctx) => {
     if(ctx.message.text === '/start') return
+    if(ctx.message.text === 'asd') {
+        runPrivately(ctx, () => {ctx.reply("Privately")})
+    }
     if(ctx.message.text === `💬 Чаты`) {
         runPrivately(ctx, () => {ctx.replyWithHTML(createNavigation())})
     }
