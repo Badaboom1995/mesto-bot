@@ -86,7 +86,7 @@ app.listen(port, () => {
     console.log(`Express server is listening on ${port}`);
 });
 
-bot.launch();
+// bot.launch();
 module.exports = {bot};
 
 
