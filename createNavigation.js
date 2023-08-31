@@ -68,6 +68,7 @@ const createNavigation = () => {
     },'');
 
     return `
+    
 Общие:
 ${generalChatsString}
     

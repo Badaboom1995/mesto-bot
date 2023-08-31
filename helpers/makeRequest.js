@@ -2,8 +2,6 @@ const axios = require('axios');
 
 async function makeRequest(ctx, url, method, body, headers) {
     try {
-        const fuckThis = false
-
         const response = await axios({
             url,
             method,
@@ -13,9 +11,11 @@ async function makeRequest(ctx, url, method, body, headers) {
                 ...headers,
             },
         });
+        console.log('success')
         return response.data;
     } catch (error) {
         if (error.response) {
+            console.log('error')
             // The request was made, and the server responded with a status code that falls out of the range of 2xx
             console.error(error.response.data);
             console.error(error.response.status);
